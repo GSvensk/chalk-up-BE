@@ -1,9 +1,17 @@
 const User = require('./../models/user')
+const Session = require('./../models/session')
+
+const sessionsInDb = async () => {
+    const sessions = await Session.find({})
+    return sessions.map(session => session.toJSON())
+}
 
 const usersInDb = async () => {
-    return await User.find({})
+    const users = await User.find({})
+    return users.map(u => u.toJSON())
 }
 
 module.exports = {
-    usersInDb
+    usersInDb,
+    sessionsInDb
 }
