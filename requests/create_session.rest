@@ -1,0 +1,10 @@
+post http://localhost:3003/api/sessions
+Content-Type: application/json
+
+{
+    "dateTime": "2019-09-13T13:59:26.281+00:00",
+    "location": "hangaren",
+    "creator": "5d7b94e9d7a1dc14cd5aaffc",
+    "participants": [],
+    "info": ""
+}
