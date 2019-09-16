@@ -60,7 +60,7 @@ describe('when there is initially one user created', () => {
         {
             id: newUserId,
             username: "testeren",
-            name: "testvard",   
+            name: "testvard",
             friends: [],
             sessions: []
         }
