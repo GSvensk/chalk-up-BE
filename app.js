@@ -7,10 +7,11 @@ const logger = require('./utils/logger')
 const sessionsRouter = require('./controllers/sessions')
 const usersRouter = require('./controllers/users')
 const userRouter = require('./controllers/user')
+const errorHandler = require('./utils/error_handler')
 
 
 try {
-    mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     logger.info('connecting to', config.MONGODB_URI)
 } catch (error) {
     logger.error('mongoose connection failed')
@@ -25,5 +26,7 @@ app.get('/', (req, res) => {
 app.use('/api/user', userRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/sessions', sessionsRouter)
+
+app.use(errorHandler)
 
 module.exports = app
