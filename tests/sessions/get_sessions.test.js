@@ -33,7 +33,7 @@ beforeEach(async () => {
 
 
     await User.deleteMany({})
-    const user = new User({ username: 'session_test', name: 'test sesson' })
+    const user = new User({ username: 'session_test', name: 'test sesson', passwordHash: 'lösen' })
     await user.save()
 })
 
