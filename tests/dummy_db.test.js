@@ -3,6 +3,7 @@ const Session = require('../models/session')
 const helper = require('./test_helper')
 const mongoose = require('mongoose')
 const app = require('../app')
+const config = require('../utils/config')
 
 describe('when there is initially one user at db', () => {
 
@@ -10,9 +11,9 @@ describe('when there is initially one user at db', () => {
         await User.deleteMany({})
         const user = new User(
             {
-                "username": "testeren",
+                "username": config.TEST_USERNAME,
                 "name": "testvard",
-                "passwordHash": "sekret",
+                "passwordHash": config.TEST_PASSWORD,
                 friends: [
                 ],
                 sessions: [
@@ -29,7 +30,7 @@ describe('when there is initially one user at db', () => {
             {
                 "username": "joey",
                 "name": "Joseph Tribiani",
-                "passwordHash": "sekret",
+                "passwordHash": config.TEST_PASSWORD,
                 friends: [
                 ],
                 sessions: [
@@ -52,7 +53,7 @@ describe('when there is initially one user at db', () => {
             {
                 dateTime: new Date(),
                 location: "hangaren",
-                creator: "5d7b94e9d7a1dc14cd5aaffc",
+                creator: "user_test_id",
                 participants: [],
                 info: ""
             })
