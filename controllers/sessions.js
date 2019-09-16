@@ -1,5 +1,7 @@
 const sessionsRouter = require('express').Router()
-const Session = require('./../models/session')
+const Session = require('../models/session')
+const jwt = require('jsonwebtoken')
+const User = require('../models/user')
 
 sessionsRouter.get('/', async (request, response, next) => {
     try {
@@ -15,17 +17,28 @@ sessionsRouter.get('/', async (request, response, next) => {
 sessionsRouter.post('/', async (request, response, next) => {
 
     const body = request.body
+    const token = request.token
 
     try {
+
+        const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET)
+        if (!token || !decodedToken.id) {
+            return response.status(401).json({ error: 'token missing or invalid' })
+        }
+
+        const user = await User.findById(decodedToken.id)
+
         const session = new Session({
             dateTime: body.dateTime,
             location: body.location,
-            creator: body.creatorId,
+            creator: user._id,
             participants: body.participants,
             info: body.info
         })
 
         const savedSession = await session.save()
+        user.sessions = user.sessions.concat(savedSession._id)
+        await user.save()
         response.json(savedSession.toJSON())
     } catch (error) {
         next(error)
