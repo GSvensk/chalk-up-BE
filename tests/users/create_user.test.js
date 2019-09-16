@@ -12,7 +12,7 @@ test('a user can be created', async () => {
     const newUser = {
         "username": "testeren",
         "name": "testvard",
-        "passwordHash": "sekret"
+        "password": "sekret"
     }
 
     await api
@@ -38,7 +38,7 @@ describe('when there is initially one user created', () => {
         newUser = {
             username: "testeren",
             name: "testvard",
-            passwordHash: "sekret"
+            password: "sekret"
         }
 
         const res = await api
