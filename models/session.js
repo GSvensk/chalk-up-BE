@@ -5,16 +5,25 @@ const sessionSchema = mongoose.Schema({
     type: Date,
     required: true
   },
-  location: String,
+  location: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 150
+  },
   creator: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   participants: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }],
-  info: String
+  info: {
+    type: String,
+    maxlength: 300
+  }
 })
 
 sessionSchema.set('toJSON', {
