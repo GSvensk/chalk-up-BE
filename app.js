@@ -7,6 +7,7 @@ const logger = require('./utils/logger')
 const sessionsRouter = require('./controllers/sessions')
 const usersRouter = require('./controllers/users')
 const userRouter = require('./controllers/user')
+const loginRouter = require('./controllers/login')
 const errorHandler = require('./utils/error_handler')
 
 
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 });
 
+app.use('/api/login', loginRouter)
 app.use('/api/user', userRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/sessions', sessionsRouter)
