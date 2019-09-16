@@ -50,6 +50,20 @@ describe('when there is initially one user created', () => {
             .send(credentials)
             .expect(401)
     })
+
+    test('a token is generated and returned on successful login', async () => {
+
+        const credentials = {
+            username: config.TEST_USERNAME,
+            password: config.TEST_PASSWORD
+        }
+
+        const res = await api
+            .post('/api/login')
+            .send(credentials)
+        
+        expect(res.body.token).toBeDefined()
+    })
 })
 
 
