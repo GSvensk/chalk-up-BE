@@ -3,6 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const config = require('./utils/config')
+const logger = require('./utils/logger')
 const sessionsRouter = require('./controllers/sessions')
 const usersRouter = require('./controllers/users')
 const userRouter = require('./controllers/user')
@@ -10,8 +11,9 @@ const userRouter = require('./controllers/user')
 
 try {
     mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    logger.info('connecting to', config.MONGODB_URI)
 } catch (error) {
-    console.log('mongoose connection failed')
+    logger.error('mongoose connection failed')
 }
 
 app.use(bodyParser.json())
