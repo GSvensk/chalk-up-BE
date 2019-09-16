@@ -5,6 +5,7 @@ usersRouter.get('/', async (request, response, next) => {
     try {
         const users = await User
             .find({})
+            .select({ "username": 1, "name": 1, "friends": 1, "sessions": 1})
 
         response.json(users.map(user => user.toJSON()))
     } catch (error) {
