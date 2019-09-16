@@ -23,6 +23,8 @@ describe('when there is initially one user at db', () => {
 
     test('creation succeeds with a fresh user', async () => {
 
+        const usersAtStart = await helper.usersInDb()
+
         const user = new User(
             {
                 "username": "joey",
@@ -37,7 +39,7 @@ describe('when there is initially one user at db', () => {
         await user.save()
 
         const usersAtEnd = await helper.usersInDb()
-        expect(usersAtEnd.length).toBe(2)
+        expect(usersAtEnd.length).toBe(usersAtStart.length + 1)
 
         const usernames = usersAtEnd.map(u => u.username)
         expect(usernames).toContain(user.username)
