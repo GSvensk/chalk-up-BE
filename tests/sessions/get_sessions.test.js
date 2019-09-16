@@ -1,7 +1,6 @@
 const supertest = require('supertest')
 const app = require('../../app')
 const Session = require('../../models/session')
-const User = require('../../models/user')
 const mongoose = require('mongoose')
 const api = supertest(app)
 
@@ -10,14 +9,14 @@ const initialSessions = [
         {
             dateTime: new Date(),
             location: "hangaren",
-            creator: "5d7b94e9d7a1dc14cd5aaffc",
+            creator: "test_user",
             participants: [],
             info: ""
         },
         {
             dateTime: new Date(),
             location: "akalla",
-            creator: "5d7b94e9d7a1dc14cd5aaffc",
+            creator: "test_user",
             participants: [],
             info: ""
         }
@@ -30,11 +29,6 @@ beforeEach(async () => {
         .map(session => new Session(session))
     const promises = sessionObjects.map(session => session.save())
     await Promise.all(promises)
-
-
-    await User.deleteMany({})
-    const user = new User({ username: 'session_test', name: 'test sesson', passwordHash: 'lösen' })
-    await user.save()
 })
 
 describe('when there is initially some sessions saved', () => {
