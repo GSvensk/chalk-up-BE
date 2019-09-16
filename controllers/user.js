@@ -9,7 +9,8 @@ userRouter.get('/:id', async (request, response, next) => {
 
         const user = await User
             .findById(id)
-            .select({ "username": 1, "name": 1, "friends": 1, "sessions": 1})
+            .select({ "username": 1, "name": 1, "friends": 1})
+            .populate('sessions')
 
         response.json(user.toJSON())
     } catch (error) {
