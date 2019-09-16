@@ -4,15 +4,16 @@ const supertest = require('supertest')
 const app = require('../../app')
 const api = supertest(app)
 const mongoose = require('mongoose')
+const config = require('../../utils/config')
 
 test('a user can be created', async () => {
     await User.deleteMany({})
     const usersAtStart = await helper.usersInDb()
 
     const newUser = {
-        "username": "testeren",
+        "username": config.TEST_USERNAME,
         "name": "testvard",
-        "password": "sekret"
+        "password": config.TEST_PASSWORD
     }
 
     await api
