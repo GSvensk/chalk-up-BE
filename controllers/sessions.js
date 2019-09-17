@@ -1,33 +1,18 @@
 const sessionsRouter = require('express').Router()
 const Session = require('../models/session')
-const jwt = require('jsonwebtoken')
 const User = require('../models/user')
+const tokenChecker = require('../utils/token_checker')
 
-sessionsRouter.get('/', async (request, response, next) => {
-    try {
-        const sessions = await Session
-            .find({})
-
-        response.json(sessions.map(session => session.toJSON()))
-    } catch (error) {
-        next(error)
-    }
-})
+sessionsRouter.use(tokenChecker)
 
 sessionsRouter.post('/', async (request, response, next) => {
 
     const body = request.body
-    const token = request.token
 
     try {
-
-        const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET)
-        if (!token || !decodedToken.id) {
-            return response.status(401).json({ error: 'token missing or invalid' })
-        }
-
-        const user = await User.findById(decodedToken.id)
-
+        //request.userId comes from tokenChecker middleware        
+        const user = await User.findById(request.userId)
+        
         const session = new Session({
             dateTime: body.dateTime,
             location: body.location,
