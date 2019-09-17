@@ -9,7 +9,6 @@ const usersRouter = require('./controllers/users')
 const userRouter = require('./controllers/user')
 const loginRouter = require('./controllers/login')
 const errorHandler = require('./utils/error_handler')
-const tokenExtractor = require('./utils/token_extractor')
 
 
 try {
@@ -20,7 +19,6 @@ try {
 }
 
 app.use(bodyParser.json())
-app.use(tokenExtractor)
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
