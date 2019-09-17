@@ -15,28 +15,24 @@ const initialSessions = [
     {
         dateTime: new Date('2019-09-20'),
         location: "malmö",
-        creator: "5d7fa380cfcc10260c5cfc5b",
         participants: [],
         info: ""
     },
     {
         dateTime: new Date('2020-01-01'),
         location: "hangaren",
-        creator: "5d7fa380cfcc10260c5cfc5b",
         participants: [],
         info: ""
     },
     {
         dateTime: new Date('2019-08-10'),
         location: "solna",
-        creator: "5d7fa380cfcc10260c5cfc5b",
         participants: [],
         info: ""
     },
     {
         dateTime: new Date('2019-10-01'),
         location: "akalla",
-        creator: "5d7fa380cfcc10260c5cfc5b",
         participants: [],
         info: ""
     }
