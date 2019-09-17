@@ -9,7 +9,6 @@ const api = supertest(app)
 const validSession = {
     dateTime: new Date(),
     location: "hangaren",
-    creator: "test",
     participants: [],
     info: ""
 }
@@ -47,7 +46,6 @@ describe('when a logged in user creates a session', () => {
 
     test('a valid session can be successfully created', async () => {
 
-        console.log(validSession)
         await api
             .post('/api/sessions')
             .set('Authorization', `bearer ${token}`)
