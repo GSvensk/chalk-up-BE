@@ -6,7 +6,6 @@ const config = require('../utils/config')
 
 loginRouter.post('/', async (request, response) => {
     const body = request.body
-
     const user = await User.findOne({ username: body.username })
     let passwordCorrect = false
 
@@ -32,7 +31,8 @@ loginRouter.post('/', async (request, response) => {
         .send({
             token,
             username: user.username,
-            name: user.name
+            name: user.name,
+            id: user._id
         })
 })
 
