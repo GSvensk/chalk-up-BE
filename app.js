@@ -9,7 +9,7 @@ const usersRouter = require('./controllers/users')
 const userRouter = require('./controllers/user')
 const loginRouter = require('./controllers/login')
 const errorHandler = require('./utils/error_handler')
-
+const cors = require('cors')
 
 try {
     mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
@@ -18,6 +18,7 @@ try {
     logger.error('mongoose connection failed')
 }
 
+app.use(cors())
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
