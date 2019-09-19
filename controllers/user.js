@@ -3,14 +3,14 @@ const userRouter = require('express').Router()
 const User = require('./../models/user')
 const sortSessions = require('../utils/session_sort')
 
+
 userRouter.get('/:id', async (request, response, next) => {
     try {
         const id = request.params.id
 
         const user = await User
             .findById(id)
-            .select({ "username": 1, "name": 1, "friends": 1})
-            .populate('sessions')
+            .select({ "username": 1, "name": 1, "friends": 1 })
 
         response.json(user.toJSON())
     } catch (error) {
@@ -24,9 +24,16 @@ userRouter.get('/:id/sessions', async (request, response, next) => {
 
         const user = await User
             .findById(id)
-            .select({ "username": 1})
-            .populate('sessions')
-        
+            .select({ "username": 1 })
+            .populate(
+                {
+                    path: 'sessions',
+                    populate: {
+                        path: 'creator',
+                        model: 'User'
+                    }
+                })
+
 
         const sortedSessions = sortSessions(user.sessions)
 
@@ -35,5 +42,6 @@ userRouter.get('/:id/sessions', async (request, response, next) => {
         next(error)
     }
 })
+
 
 module.exports = userRouter
