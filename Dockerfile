@@ -1,3 +1,4 @@
+# https://jdlm.info/articles/2019/09/06/lessons-building-node-app-docker.html
 FROM node:10.16.3 AS development
 
 RUN mkdir /srv/chalkup && chown node:node /srv/chalkup
