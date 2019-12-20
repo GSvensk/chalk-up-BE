@@ -3,7 +3,9 @@ version: '3.7'
 services:
   chalkup:
     build: .
-    command: echo 'ready'
+    command: node index.js
+    ports:
+        - '3003:3003'
     volumes:
       - .:/srv/chalkup
       - chalkup_node_modules:/srv/chalkup/node_modules
