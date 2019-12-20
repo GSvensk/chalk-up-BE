@@ -13,4 +13,4 @@ services:
       - chalkup_node_modules:/srv/chalkup/node_modules
 
 volumes:
-  chat_node_modules:      
+  chalkup_node_modules:      
