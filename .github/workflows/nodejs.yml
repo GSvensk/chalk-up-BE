@@ -19,3 +19,4 @@ jobs:
         npm test
       env:
         CI: true
+        MONGODB_URI: mongodb+srv://GSvensk:wSrSZOhmjIVEnL4V@chalk-up-isxqz.mongodb.net/test?retryWrites=true&w=majority
