@@ -6,3 +6,4 @@ node_modules
 requests
 .env
 .gitignore
+coverage
